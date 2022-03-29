@@ -1,84 +1,27 @@
-// var btnStart = document.getElementById("btn-start");
-// var btnReset = document.getElementById('btn-reset');
-// var timer = document.getElementById("span-timer")
+///TO DO
+//ASSIGN SETINTERVAL TO A VARIABLE, RETURN OUT THE VALUE, USE THE VARIABLE IN THE CLEARINTERVAL
 
+var btnStart = $("#btn-start");
+var btnReset = $("#btn-reset");
+var timerEl = $("#span-timer");
+var startTime = 10;
 
-var btnStart = $('#btn-start');
-var btnReset = $('#btn-reset');
-var timerEl = $('#span-timer');
-var startTime = 90;
-
-
-
-btnStart.on('click', function(){
-    // startQuiz();
-    timerEl.text(startTime)
-    console.log('working')
-    
-})
-
-
-// $(startQuiz(){
-
-  // jQuery methods go here...
-
-// });
-
-
-
-
-
-
-
-
-
-
-// btnReset.addEventListener("click", FUNCTION)
-//VANILLA  JS
-
-// function startQuiz(){
-//     var countdownTimer = timer;
-//     // console.log(countdownTimer)
-    
-//     setInterval(countdownTimer, 1000)
-// };
-
-// function resetQuiz(){
-//     clearInterval()
-// };
-
-
-
-
-
-
-
-
-
-
-// var startCount = 16;
-// //TIMER
-
-$("#startButton").click(function (e) {
-    var timer = startCount;
-    console.log(timer)
-    setInterval(function () {
-        $("#span-timer").html(count);
-        count--;
-         if (count<= 0){
-            $("#span-timer").html("TIME'S UP!")}
-    }, 1000);
+btnStart.on("click", function () {
+  timerEl.text(startTime);
+  var countDown = startTime;
+  var timer = setInterval(function () {
+    countDown--;
+    $("#span-timer").html(countDown);
+    if (countDown <= 0) {
+      $("#span-timer").html("TIME'S UP!");
+    }
+    //ADD CODE HERE - IF TIMER < 6
+    //COLOR BECOMES RED
+    return timer;
+  }, 1000);
+  btnReset.on("click", function () {
+    $("#span-timer").html("Click 'Start' to begin the Quiz!");
+    clearInterval(timer);
+  });
+  //  REQUIRE 'REVEAL-QUESTION' FUNCTION HERE
 });
-
- 
-
-
-
-
-// $("#resetButton").click(function (e) {
-//     clearInterval(testTimer()
-// //     {
-// //      $("#stopWatch").html("Click 'Start' to begin") 
-// // }
-// )
-// });
