@@ -8,6 +8,8 @@ var startTime = 10;
 
 btnStart.on("click", function () {
   timerEl.text(startTime);
+  $("#btn-start").css("display", "none");
+  // $("btn-start").css("display", "none");
   var countDown = startTime;
   var timer = setInterval(function () {
     countDown--;
@@ -20,6 +22,7 @@ btnStart.on("click", function () {
     return timer;
   }, 1000);
   btnReset.on("click", function () {
+    $("#btn-start").css("display", "block");
     $("#span-timer").html("Click 'Start' to begin the Quiz!");
     clearInterval(timer);
   });
