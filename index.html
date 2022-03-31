@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+<!-- <link rel="manifest" href="/site.webmanifest"> -->
 </head>
 
 <body>
@@ -30,11 +30,19 @@
                 <button id="answer-four" class="button">Answer 4</button>
             </div>
         </div>
-            <div class="btn-container">
+            <div class="btn-container"> 
+                <span id="span-timer">Click 'Start' to begin the Quiz!</span><br>
                 <button id="btn-start">Start</button>
                 <button id="btn-reset">Reset</button>
-                <span id="span-timer">Click 'Start' to begin the Quiz!</span><br>
+                <button id="btn-highScore">High Scores</button>
+                <button id="btn-saveScore">Save Score!</button>
+               
                 <!-- <button id="btn"></button> -->
+            </div>
+            <div class="high-score-wrapper">
+                <div id="high-score-container">
+                    <span></span>
+                </div>
             </div>
         </div>
     <script src="./js/script.js"></script>
