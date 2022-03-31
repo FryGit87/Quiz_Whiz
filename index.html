@@ -14,13 +14,24 @@
 </head>
 
 <body>
-    <span id="span-timer">Click 'Start' to begin the Quiz!</span><br>
-    <div class="btn-container">
-
-        <button id="btn-start">Start</button>
-        <button id="btn-reset">Reset</button>
-        <!-- <button id="btn"></button> -->
-    </div>
+    <!-- <span id="span-timer">Click 'Start' to begin the Quiz!</span><br> -->
+    <div class="container-wrapper">
+        <div id="question-container" class="hide">
+            <div id="question">Question</div>
+            <div id="answer-buttons">
+                <button id="answer-one" class="button">Answer 1</button>
+                <button id="answer-two" class="button">Answer 2</button>
+                <button id="answer-three" class="button">Answer 3</button>
+                <button id="answer-four" class="button">Answer 4</button>
+            </div>
+        </div>
+            <div class="btn-container">
+                <button id="btn-start">Start</button>
+                <button id="btn-reset">Reset</button>
+                <span id="span-timer">Click 'Start' to begin the Quiz!</span><br>
+                <!-- <button id="btn"></button> -->
+            </div>
+        </div>
     <script src="./js/script.js"></script>
 </body>
 
