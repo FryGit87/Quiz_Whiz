@@ -1,27 +1,32 @@
-///TO DO
-//ASSIGN SETINTERVAL TO A VARIABLE, RETURN OUT THE VALUE, USE THE VARIABLE IN THE CLEARINTERVAL
-
-var btnStart = $("#btn-start");
+var btnStart = $("#quiz-start-btn");
 var btnReset = $("#btn-reset");
 var timerEl = $("#span-timer");
 var startTime = 10;
 
 btnStart.on("click", function () {
   timerEl.text(startTime);
-  $("#btn-start").css("display", "none");
+  $("#quiz-start-btn").css("display", "none");
   var countDown = startTime;
   var timer = setInterval(function () {
     countDown--;
     $("#span-timer").html(countDown);
     if (countDown <= 0) {
       $("#span-timer").html("TIME'S UP!");
+      $(".question-container").css("display", "none");
+      $("#quiz-counter").css("display", "none");
     }
     //ADD CODE HERE - IF TIMER < 6
     //COLOR BECOMES RED
     return timer;
   }, 1000);
   btnReset.on("click", function () {
-    $("#btn-start").css("display", "block");
+    // $("#quiz-start-btn").css("display", "block");
+    $("#quiz-start-btn").removeAttr("style");
+
+    $("#quiz-start-screen").removeAttr("style");
+    $(".question-container").css("display", "none");
+    $("#quiz-counter").css("display", "none");
+
     $("#span-timer").html("Click 'Start' to begin the Quiz!");
     clearInterval(timer);
   });

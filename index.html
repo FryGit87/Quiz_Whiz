@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./jq/dist/jquery.quiz-min.css">
 </head>
+
 <body>
-    <span id="span-timer">Click 'Start' to begin the Quiz!</span><br>
-    <div class="btn-container">
-       
-        <button id="btn-start">Start</button>
-        <button id="btn-reset">Reset</button>
-        <!-- <button id="btn"></button> -->
+    <div id="quiz">
+        <!-- <span id="span-timer">Click 'Start' to begin the Quiz!</span><br> -->
+        <div class="btn-container">
+            <!-- <button id="btn-start">Start</button> -->
+            <!-- <button id="btn-reset">Reset</button> -->
+            <!-- <button id="btn"></button> -->
+        </div>
+        <div id="quiz-header">
+
+            <h1>Quiz Example</h1>
+            <span id="span-timer">Click 'Start' to begin the Quiz!</span><br>
+            <!-- <p><a id="quiz-home-btn">Quiz Home</a></p> -->
+            <button id="btn-reset">Reset</button>
+
+        </div>
+
+        <div id="quiz-start-screen">
+
+            <p>
+
+                <a href="#" id="quiz-start-btn" class="quiz-button">Start Quiz</a>
+
+            </p>
+
+        </div>
+
     </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+        crossorigin="anonymous"></script>
+    <script src="/./jq/dist/jquery.quiz-min.js"></script>
     <script src="./js/script.js"></script>
 </body>
+
 </html>
