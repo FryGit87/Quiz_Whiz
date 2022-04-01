@@ -26,11 +26,9 @@ btnStart.on("click", function () {
     if (countDown <= 0) {
       $("#span-timer").html("TIME'S UP!").css("font-size", "30px");
       $("#btn-saveScore").css("display", "inline");
-      $("#question-container").html("<h2>GAME OVER</h2>");
-      $("h2").append("<h4>Correct Answers: </h4>");
-      $("h2").append("<h4>Inorrect Answers: </h4>");
-      $("h2").append("<h4> SCORE: </h4>");
       $("#btn-save").css("display", "inline");
+      $("#question-container").addClass("hide");
+      $("#hidden-results").removeClass("hide");
     }
     return timer;
   }, 1000);
@@ -39,7 +37,9 @@ btnStart.on("click", function () {
     $("#btn-highScore").css("display", "inline");
     $("#btn-reset").css("display", "none");
     $("#btn-saveScore").css("display", "none");
+    $("#hidden-results").addClass("hide");
     $("#question-container").addClass("hide");
+
     $("#span-timer")
       .css("font-size", "20px")
       .css("color", "black")
