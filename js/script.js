@@ -1,6 +1,7 @@
 var btnStart = $("#btn-start");
 var btnReset = $("#btn-reset");
 var timerEl = $("#span-timer");
+var btnHighScore = $("#btn-highScore");
 var questionContainer = $("#question-container");
 var startTime = 5;
 var questionEl = $("#question");
@@ -14,6 +15,8 @@ btnStart.on("click", function () {
   $("#btn-highScore").css("display", "none");
   $("#btn-reset").css("display", "inline-flex");
   $("#question-container").removeClass("hide");
+  $("#leader-board").addClass("hide");
+
   var countDown = startTime;
   var timer = setInterval(function () {
     countDown--;
@@ -39,6 +42,7 @@ btnStart.on("click", function () {
     $("#btn-saveScore").css("display", "none");
     $("#hidden-results").addClass("hide");
     $("#question-container").addClass("hide");
+    $("#leader-board").addClass("hide");
 
     $("#span-timer")
       .css("font-size", "20px")
@@ -46,6 +50,10 @@ btnStart.on("click", function () {
       .html("Click 'Start' to begin the Quiz!");
     clearInterval(timer);
   });
+});
+
+btnHighScore.on("click", function () {
+  $("#leader-board").toggle();
 });
 
 //NEED TO ADD QUIZ FUNCTION, CALL WHEN START IS CLICKED
