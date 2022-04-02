@@ -41,6 +41,28 @@ button {
   outline: none;
 }
 
+.questionBox {
+  background-color: #3e8fa1;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.optionBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 30px 0;
+  grid-gap: 15px;
+}
+
+.optionBox span {
+  background-color: lightgoldenrodyellow;
+  border-radius: 10px;
+  color: #444;
+  border: 1px solid #444;
+  padding: 10px 15px;
+}
+
 #btn-reset {
   align-self: center;
   display: inline-flex;
@@ -72,7 +94,8 @@ button {
   /* display: none; */
 }
 
-button:hover {
+button:hover,
+.optionBox > span:hover {
   cursor: pointer;
   font-size: 18px;
   box-shadow: 2px 2px 4px grey;
@@ -118,6 +141,17 @@ button:hover {
 
 .user-initials {
   display: inline;
+}
+
+.optionBox span.right {
+  background-color: #00ab00;
+  border-color: #00ab00;
+  color: #fff;
+}
+.optionBox span.wrong {
+  background-color: #ff3b0e;
+  border-color: #ff3b0e;
+  color: #fff;
 }
 
 #hidden-results {

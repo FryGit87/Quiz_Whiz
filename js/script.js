@@ -1,21 +1,25 @@
 var btnStart = $("#btn-start");
 var btnReset = $("#btn-reset");
 var timerEl = $("#span-timer");
+var btnSaveScore = $("#btn-saveScore");
 var btnHighScore = $("#btn-highScore");
 var questionContainer = $("#question-container");
-var startTime = 5;
+var startTime = 15;
 var questionEl = $("#question");
 var answerButtonsEl = $("#answer-buttons");
 var question;
+var currentIndex = 0;
 
 //START BUTTON / RESET BUTTON / COUNTER
 btnStart.on("click", function () {
+  printQuestion(index);
   timerEl.text(startTime);
+  $("#leader-board").css("display", "none");
   $("#btn-start").css("display", "none");
+  $(".game-buttons").removeClass("hide");
   $("#btn-highScore").css("display", "none");
   $("#btn-reset").css("display", "inline-flex");
   $("#question-container").removeClass("hide");
-  $("#leader-board").addClass("hide");
 
   var countDown = startTime;
   var timer = setInterval(function () {
@@ -27,11 +31,15 @@ btnStart.on("click", function () {
       $("#span-timer").css("color", "red");
     }
     if (countDown <= 0) {
+      clearInterval(timer);
       $("#span-timer").html("TIME'S UP!").css("font-size", "30px");
       $("#btn-saveScore").css("display", "inline");
-      $("#btn-save").css("display", "inline");
+      // $("#btn-save").css("display", "inline");
       $("#question-container").addClass("hide");
       $("#hidden-results").removeClass("hide");
+      clearInterval(timer);
+
+      result();
     }
     return timer;
   }, 1000);
@@ -43,6 +51,7 @@ btnStart.on("click", function () {
     $("#hidden-results").addClass("hide");
     $("#question-container").addClass("hide");
     $("#leader-board").addClass("hide");
+    $(".game-buttons").addClass("hide");
 
     $("#span-timer")
       .css("font-size", "20px")
@@ -56,93 +65,137 @@ btnHighScore.on("click", function () {
   $("#leader-board").toggle();
 });
 
-//NEED TO ADD QUIZ FUNCTION, CALL WHEN START IS CLICKED
+let index = 0;
+let attempt = 0;
+let score = 0;
+let wrong = 0;
 
-//FIRST QUESTION TRIAL!!!
-// const quizQuestions = [
-//   {
-//     question: "From which part of a plant does a fruit typically develop?",
-//     answer: [
-//       { text: "Leaf", correct: false },
-//       { text: "Flower", correct: true },
-//       { text: "Stem", correct: false },
-//       { text: "Roots", correct: false },
-//     ],
-//   },
-// ];
+let questions = quiz.sort(function () {
+  return 0.5 - Math.random();
+});
 
-// question: "Which part of celery do we often eat?",
-// answer: [
-//         { text: "Leaf", correct: false },
-//       { text: "Flower", correct: false },
-//       { text: "Stem", correct: true },
-//       { text: "Roots", correct: false },
-//     ],
-//   },
-// ];
+let totalQuestion = questions.length;
 
-// question: "Williams” and “Conference” are kinds of which type of fruit?";
-// answer: [
-//         { text: "Apples", correct: false },
-//       { text: "Bananas", correct: flase },
-//       { text: "Cucumbers", correct: false },
-//       { text: "Pears", correct: true },
-//     ],
-//   },
-// ];
+// $(function () {
+//   // timer code start from here
 
-// IF correct: true
-// correctAnswer++
-//else
-//wrongAnswer++
-// IF questionsAnswer == wrongAnswer + correctAnswer || countDown =< 0
-// $("#question-container").html("<h2>GAME OVER</h2>");
-// $("h2").append("<h4>Correct Answers: </h4>");
-// $("h2").append("<h4>Inorrect Answers: </h4>");
-// $("h2").append("<h4> Answers: </h4>");
-//$("#btn-save").css("display", "inline");
+//   let totaTime = 200; // 200 seconds for timer
+//   let min = 0;
+//   let sec = 0;
+//   let counter = 0;
 
-// ----------------------------------------------------------------------------------------------
-// "A. Leaf", "B. Flower", "C. Stem", "D. Roots"],
-//     correctIndex: 1,
-//     correctResponse: "Custom correct response.",
-//     incorrectResponse: "Custom incorrect response.",
-//   },
-//   {
-//     q: "2. Which part of celery do we often eat?",
-//     options: ["A. Leaf", "B. Flower", "C. Stem", "D. Roots"],
-//     correctIndex: 3,
-//     correctResponse: "Custom correct response.",
-//     incorrectResponse: "Custom incorrect response.",
-//   },
-//   {
-//     q: "3. “Williams” and “Conference” are kinds of which type of fruit?",
-//     options: ["A. Apples", "B. Bananas", "C. Cucumbers", "D. Pears"],
-//     correctIndex: 3,
-//     correctResponse: "Custom correct response.",
-//     incorrectResponse: "Custom incorrect response.",
-//   },
-//   {
-//     q: "4. This fruit is often grown in many Asian countries and is considered one of the stinkiest fruits in the world. What is it?",
-//     options: ["A. Durian", "B. Rambutan", "C. Persimmon", "D. Lychee"],
-//     correctIndex: 0,
-//     correctResponse: "Custom correct response.",
-//     incorrectResponse: "Custom incorrect response.",
-//   },
-//   {
-//     q: "5. Broccoli, Brussels sprouts, cauliflower, and cabbage belong to which type of vegetables?",
-//     options: [
-//       "A. Root vegetables",
-//       "B. Cruciferous vegetables",
-//       "C. Leafy green vegetables",
-//       "D. Poisonous vegetables",
-//     ],
-//     correctIndex: 1,
-//     correctResponse: "Custom correct response.",
-//     incorrectResponse: "Custom incorrect response.",
-//   },
-// ];
+//   let timer = setInterval(function () {
+//     counter++;
+//     min = Math.floor((totaTime - counter) / 60); // calculating min
+//     sec = totaTime - min * 60 - counter;
 
-// $("#quiz").quiz({
-//   questions: myQuiz,
+//     $(".timerBox span").text(min + ":" + sec);
+
+//     if (counter == totaTime) {
+//       alert("Time's up. press ok to show the result.");
+//       result();
+//       clearInterval(timer);
+//     }
+//   }, 1000); // timer set for 1 seconds interval
+//   // timer code end here
+
+//   // print Question
+//   printQuestion(index);
 // });
+
+function printQuestion(i) {
+  $(".questionBox").text(questions[i].question);
+  $(".optionBox span").eq(0).text(questions[i].option[0]);
+  $(".optionBox span").eq(1).text(questions[i].option[1]);
+  $(".optionBox span").eq(2).text(questions[i].option[2]);
+  $(".optionBox span").eq(3).text(questions[i].option[3]);
+}
+
+function checkAnswer(option) {
+  attempt++;
+
+  let optionClicked = $(option).data("opt");
+
+  // console.log(questions[index]);
+
+  if (optionClicked == questions[index].answer) {
+    $(option).addClass("right");
+    score++;
+  } else {
+    $(option).addClass("wrong");
+    wrong++;
+  }
+
+  $(".scoreBox span").text(score);
+
+  $(".optionBox span").attr("onclick", "");
+}
+
+function showNext() {
+  if (index >= questions.length - 1) {
+    showResult(0);
+
+    return;
+  }
+
+  index++;
+
+  $(".optionBox span").removeClass();
+
+  $(".optionBox span").attr("onclick", "checkAnswer(this)");
+
+  printQuestion(index);
+}
+
+function showResult(j) {
+  if (
+    j == 1 &&
+    index < questions.length - 1 &&
+    !confirm(
+      "Quiz has not finished yet. Press ok to skip quiz & get you final result."
+    )
+  ) {
+    return;
+  }
+  result();
+}
+
+// Function for result end
+
+// Result function start
+function result() {
+  $("#span-timer").hide();
+  $("#question-container").hide();
+  $("#resultScreen").show();
+  $("#btn-next").hide();
+  $("#totalQuestion").text(totalQuestion);
+  $("#attemptQuestion").text(attempt);
+  $("#correctAnswers").text(score);
+  $("#wrongAnswers").text(wrong);
+  $("#btn-saveScore").css("display", "inline");
+}
+
+// finish later for scoreboard
+// $(function () {
+//   $("#btn-saveScore").click(function () {
+//     var userIntialsInput = $("#user-initials-input").val();
+//     localStorage.setItem("getvalue", userIntialsInput);
+//   });
+// });
+
+// calculateScore(){
+
+// }
+
+//after shpowing questions and options, increment the current Index , reset once question list is finished
+
+//button click- validate userchoice with correect answer attribute and increement index
+
+//   // if (this.target == showQuestions.correctAnswer) {
+//   //   score + 10;
+//   //   correctAnswer++;
+//   // } else {
+//   //   timer - 10;
+//   //   incorrectAnswer++;
+//   // }
+// }

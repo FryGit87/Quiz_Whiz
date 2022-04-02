@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Whiz</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
 
 <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
@@ -23,42 +20,78 @@
 
 <body>
     <div id="leader-board" class="hide">
-        <h2>High Scores</h2>
+        <h2 id="high-scores-header">High Scores</h2>
     </div>
     <!-- <span id="span-timer">Click 'Start' to begin the Quiz!</span><br> -->
     <div class="container-wrapper">
         <div id="question-container" class="hide">
-            <div id="question">Question</div>
-            <div id="answer-buttons">
-                <button id="answer-one" class="button">Answer 1</button>
-                <button id="answer-two" class="button">Answer 2</button>
-                <button id="answer-three" class="button">Answer 3</button>
-                <button id="answer-four" class="button">Answer 4</button>
-                
+            <div class="questionBox">
+                What does HTML stand for?
+            </div>
+            <div class="optionBox">
+                <span onclick="checkAnswer(this)" data-opt="1"></span>
+                <span onclick="checkAnswer(this)" data-opt="2"></span>
+                <span onclick="checkAnswer(this)" data-opt="3"></span>
+                <span onclick="checkAnswer(this)" data-opt="4"></span>
             </div>
         </div>
-        <div id="hidden-results" class="hide">
+        <!-- <div id="hidden-results" class="hide"> removed-->
+            <div class="box" id="resultScreen" style="display: none;">
+                <div class="title">
+                    <h1>Whiz Kidz Quiz Result</h1>
+                </div>
             <h2> Game Over!</h2>
-            <h4>Correct Answers: </h4>
-            <h4>Incorrect Answers: </h4>
-            <h4>Score :</h4>
-            <h4 class="user-initials">Type your Initials :    </h4><input type="text">
-        </div>
+                <div class="resultBox">
+                    <h4><label>Questions : </label>
+                    <span id="totalQuestion">10</span></h4>
+                    <h4><label>Attempt : </label>
+                    <span id="attemptQuestion">0</span></h4>
+                    <h4><label>Correct : </label>
+                    <span id="correctAnswers">0</span></h4>
+                    <h4><label>Wrong : </label>
+                    <span id="wrongAnswers">0</span></h4>
+                    <h4 class="user-initials">
+                    Type your Initials :    </h4>
+                    <input type="text" id="user-initials-input">
+                </div>
+            </div>
+
+        <!-- </div> /removed-->
             <div class="btn-container"> 
                 <span id="span-timer">Click 'Start' to begin the Quiz!</span><br>
                 <button id="btn-start">Start</button>
-                <button id="btn-reset">Reset</button>
+                <button id="btn-reset" class="hide game-buttons" onclick="window.location.href = 'index.html';">Reset</button>
                 <button id="btn-highScore">High Scores</button>
                 <button id="btn-saveScore">Save Score!</button>
                
-                <!-- <button id="btn"></button> -->
+
             </div>
-            <div class="high-score-wrapper">
-                <div id="high-score-container">
-                    <span>hide this later</span>
-                </div>
+            <div class="footer">
+                <button onclick="showNext()" id="btn-next" class="hide game-buttons">
+                    Next
+                </button>
             </div>
+                    <!-- <div class="box" id="resultScreen" style="display: none;">
+                        <div class="title">
+                            Whiz Kidz Quiz Result
+                        </div> -->
+                    
+                        <!-- <div class="resultBox">
+                            <label>Questions : </label>
+                            <span id="totalQuestion">10</span>
+                            <label>Attempt : </label>
+                            <span id="attemptQuestion">0</span>
+                            <label>Correct : </label>
+                            <span id="correctAnswers">0</span>
+                            <label>Wrong : </label>
+                            <span id="wrongAnswers">0</span>
+                        </div> -->
+                    
+                    <!-- </div> -->
         </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./js/questions.js"></script>
     <script src="./js/script.js"></script>
 </body>
 
