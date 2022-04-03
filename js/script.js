@@ -4,7 +4,7 @@ var timerEl = $("#span-timer");
 var btnSaveScore = $("#btn-saveScore");
 var btnHighScore = $("#btn-highScore");
 var questionContainer = $("#question-container");
-var startTime = 15;
+var startTime = 75;
 var questionEl = $("#question");
 var answerButtonsEl = $("#answer-buttons");
 var question;
@@ -20,49 +20,62 @@ clearScores.on("click", function () {
 btnStart.on("click", function () {
   printQuestion(index);
   timerEl.text(startTime);
+  tristan.startTimer();
   $("#leader-board").css("display", "none");
   $("#btn-start").css("display", "none");
   $(".game-buttons").removeClass("hide");
   $("#btn-highScore").css("display", "none");
   $("#btn-reset").css("display", "inline-flex");
   $("#question-container").removeClass("hide");
-
-  var countDown = startTime;
-  var timer = setInterval(function () {
-    countDown--;
-    $("#span-timer").html(countDown);
-    if (countDown <= 0) {
-      clearInterval(timer);
-      $("#span-timer").html("TIME'S UP!").css("font-size", "30px");
-      $("#btn-saveScore").css("display", "inline");
-      $("#question-container").addClass("hide");
-      $("#hidden-results").removeClass("hide");
-      result();
-    }
-    // COOL FUNCTION BUT TIMER WON'T CLEAR
-    // if (countDown <= 5) {
-    //   $("#span-timer").fadeOut(400);
-    //   $("#span-timer").fadeIn(400);
-    //   $("#span-timer").css("color", "red");
-    // }
-    return timer;
-  }, 1000);
-  btnReset.on("click", function () {
-    $("#btn-start").css("display", "inline");
-    $("#btn-highScore").css("display", "inline");
-    $("#btn-reset").css("display", "none");
-    $("#btn-saveScore").css("display", "none");
-    $("#hidden-results").addClass("hide");
-    $("#question-container").addClass("hide");
-    $("#leader-board").addClass("hide");
-    $(".game-buttons").addClass("hide");
-    $("#span-timer")
-      .css("font-size", "20px")
-      .css("color", "black")
-      .html("Click 'Start' to begin the Quiz!");
-    clearInterval(timer);
-  });
 });
+
+function stopWatch() {
+  var countDown = startTime;
+  var timer;
+  function wrongAnswerPenalty() {
+    countDown -= 10;
+  }
+  function startTimer() {
+    timer = setInterval(function () {
+      countDown--;
+      $("#span-timer").html(countDown);
+      if (countDown <= 0) {
+        clearInterval(timer);
+        $("#span-timer").html("TIME'S UP!").css("font-size", "30px");
+        $("#btn-saveScore").css("display", "inline");
+        $("#question-container").addClass("hide");
+        $("#hidden-results").removeClass("hide");
+        result();
+      }
+      // COOL FUNCTION BUT TIMER WON'T CLEAR
+      // if (countDown <= 5) {
+      //   $("#span-timer").fadeOut(400);
+      //   $("#span-timer").fadeIn(400);
+      //   $("#span-timer").css("color", "red");
+      // }
+      // return timer;
+    }, 1000);
+  }
+  return { wrongAnswerPenalty, startTimer };
+}
+
+btnReset.on("click", function () {
+  $("#btn-start").css("display", "inline");
+  $("#btn-highScore").css("display", "inline");
+  $("#btn-reset").css("display", "none");
+  $("#btn-saveScore").css("display", "none");
+  $("#hidden-results").addClass("hide");
+  $("#question-container").addClass("hide");
+  $("#leader-board").addClass("hide");
+  $(".game-buttons").addClass("hide");
+  $("#span-timer")
+    .css("font-size", "20px")
+    .css("color", "black")
+    .html("Click 'Start' to begin the Quiz!");
+  clearInterval(timer);
+});
+
+var tristan = stopWatch();
 
 var userNameEl = $("#user-name");
 
@@ -77,16 +90,16 @@ btnHighScore.on("click", function () {
   getHighScore();
 });
 
-let index = 0;
-let attempt = 0;
-let score = 0;
-let wrong = 0;
+var index = 0;
+var attempt = 0;
+var score = 0;
+var wrong = 0;
 
-let questions = quiz.sort(function () {
+var questions = quiz.sort(function () {
   return 0.5 - Math.random();
 });
 
-let totalQuestion = questions.length;
+var totalQuestion = questions.length;
 
 // $(function () {
 //   // timer code start from here
@@ -126,7 +139,7 @@ function printQuestion(i) {
 function checkAnswer(option) {
   attempt++;
 
-  let optionClicked = $(option).data("opt");
+  var optionClicked = $(option).data("opt");
 
   // console.log(questions[index]);
 
@@ -135,6 +148,7 @@ function checkAnswer(option) {
     score++;
   } else {
     $(option).addClass("wrong");
+    tristan.wrongAnswerPenalty();
     wrong++;
   }
 
