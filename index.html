@@ -20,7 +20,10 @@
 
 <body>
     <div id="leader-board" class="hide">
-        <h2 id="high-scores-header">High Scores</h2>
+        <ul class="high-scores-display">
+            <h2 id="high-scores-header">High Scores</h2>
+        </ul>
+        <button id="clear-storage">Clear Scores</button>
     </div>
     <!-- <span id="span-timer">Click 'Start' to begin the Quiz!</span><br> -->
     <div class="container-wrapper">
@@ -50,9 +53,20 @@
                     <span id="correctAnswers">0</span></h4>
                     <h4><label>Wrong : </label>
                     <span id="wrongAnswers">0</span></h4>
-                    <h4 class="user-initials">
+                    
+                    <form id="user-initials">
+                        <input type="text" class="form-input w-100" id="user-name" name="user-name"
+                            placeholder="Enter your initials" />
+                        <!-- <button class="btn btn-info">Add Item</button> -->
+                    </form>
+                    
+                    <!-- <h4 class="user-initials">
                     Type your Initials :    </h4>
-                    <input type="text" id="user-initials-input">
+                    <input type="text" id="user-initials-input"> -->
+
+
+
+
                 </div>
             </div>
 

@@ -9,6 +9,12 @@ var questionEl = $("#question");
 var answerButtonsEl = $("#answer-buttons");
 var question;
 var currentIndex = 0;
+var clearScores = $("#clear-storage");
+
+clearScores.on("click", function () {
+  localStorage.clear();
+  highScoreList.text(`High Scores`);
+});
 
 //START BUTTON / RESET BUTTON / COUNTER
 btnStart.on("click", function () {
@@ -25,22 +31,20 @@ btnStart.on("click", function () {
   var timer = setInterval(function () {
     countDown--;
     $("#span-timer").html(countDown);
-    if (countDown <= 5) {
-      $("#span-timer").fadeOut(400);
-      $("#span-timer").fadeIn(400);
-      $("#span-timer").css("color", "red");
-    }
     if (countDown <= 0) {
       clearInterval(timer);
       $("#span-timer").html("TIME'S UP!").css("font-size", "30px");
       $("#btn-saveScore").css("display", "inline");
-      // $("#btn-save").css("display", "inline");
       $("#question-container").addClass("hide");
       $("#hidden-results").removeClass("hide");
-      clearInterval(timer);
-
       result();
     }
+    // COOL FUNCTION BUT TIMER WON'T CLEAR
+    // if (countDown <= 5) {
+    //   $("#span-timer").fadeOut(400);
+    //   $("#span-timer").fadeIn(400);
+    //   $("#span-timer").css("color", "red");
+    // }
     return timer;
   }, 1000);
   btnReset.on("click", function () {
@@ -52,7 +56,6 @@ btnStart.on("click", function () {
     $("#question-container").addClass("hide");
     $("#leader-board").addClass("hide");
     $(".game-buttons").addClass("hide");
-
     $("#span-timer")
       .css("font-size", "20px")
       .css("color", "black")
@@ -61,8 +64,17 @@ btnStart.on("click", function () {
   });
 });
 
+var userNameEl = $("#user-name");
+
+btnSaveScore.on("click", function () {
+  var userNameInput = userNameEl.val();
+  saveHighScore(userNameInput, score);
+  console.log(userNameInput);
+});
+
 btnHighScore.on("click", function () {
   $("#leader-board").toggle();
+  getHighScore();
 });
 
 let index = 0;
@@ -134,7 +146,6 @@ function checkAnswer(option) {
 function showNext() {
   if (index >= questions.length - 1) {
     showResult(0);
-
     return;
   }
 
@@ -151,13 +162,40 @@ function showResult(j) {
   if (
     j == 1 &&
     index < questions.length - 1 &&
-    !confirm(
-      "Quiz has not finished yet. Press ok to skip quiz & get you final result."
-    )
+    !confirm()
+    // "Quiz has not finished yet. Press ok to skip quiz & get you final result." removed function, not user friendly
   ) {
     return;
   }
+
   result();
+}
+var highScoreList = $("#high-scores-header");
+var userName = $("input[name=user-name");
+var saveUserName = "";
+
+function saveHighScore(name, score) {
+  var userArr = [];
+  var storedScore = localStorage.getItem("userArr");
+  if (storedScore != null) {
+    userArr = JSON.parse(storedScore);
+  }
+  var userDetails = {
+    userInitials: name,
+    userScore: score,
+  };
+  userArr.push(userDetails);
+  localStorage.setItem("userArr", JSON.stringify(userArr));
+}
+
+function getHighScore() {
+  var highScore = JSON.parse(localStorage.getItem("userArr"));
+  console.log(highScore);
+  highScore.forEach((addScore) => {
+    var userInitialsEl = $("<li>");
+    userInitialsEl.text(addScore.userInitials + " " + addScore.userScore);
+    highScoreList.append(userInitialsEl);
+  });
 }
 
 // Function for result end
