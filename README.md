@@ -6,30 +6,23 @@ https://frygit87.github.io/Quiz_Whiz/
 
 ## **Goals**
 
-To build the world's greatest and most fabulously extraordinarily stupendously marvellous Vegetable Quiz.
+To build the world's greatest and most fabulously extraordinarily stupendously marvellous Code Quiz.
 
 ## **Tasks**
 
-Provide a user-friendly synopsis of the out-going, motivated and resourceful individual that is Kym Reilly.
+To build a timed coding quiz with multiple-choice questions that dynamically updates HTML and CSS finished with a clean, polished user interface.
 
-    ✅  list of required tasks to complete, that have been completed
-    ✅  list of required tasks to complete, that have been completed
-    ✅  list of required tasks to complete, that have been completed
-    ✅  list of required tasks to complete, that have been completed
-    ✅  list of required tasks to complete, that have been completed
-    ✅  list of required tasks to complete, that have been completed
-    ✅  list of required tasks to complete, that have been completed
-    ✅  list of required tasks to complete, that have been completed
-    ✅  list of required tasks to complete, that have been completed
+    ✅  a timer starts when the start button is clicked
+    ✅  the first question is presented as soon as the timer starts
+    ✅  submitting an answer, updates the score and provides the next question
+    ✅  time is deducted from the clock when an incorrect answer is submitted
+    ✅  once the timer reaches 0, the quiz is ended
+    ✅  user can store their score and name or initials once the game is over
 
 ## **Web App**
 
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
-![]()
+!Start Page[./img/Start-page.png]()
+!High Score[./img/High-Score.png]()
+!First Question[./img/First-Question.png]()
+!Result Page[./img/Result-Page.png]()
+!Saved High Score[./img/Saved-High-Score.png]()
