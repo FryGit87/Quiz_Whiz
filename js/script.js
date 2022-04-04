@@ -11,16 +11,17 @@ var question;
 var currentIndex = 0;
 var clearScores = $("#clear-storage");
 
+//CLEAR HIGH SCORES (LOCAL STORAGE DATA)
 clearScores.on("click", function () {
   localStorage.clear();
   highScoreList.text(`High Scores`);
 });
 
-//START BUTTON / RESET BUTTON / COUNTER
+//START BUTTON / RESET BUTTON / COUNTER, ON CLICK
 btnStart.on("click", function () {
   printQuestion(index);
   timerEl.text(startTime);
-  tristan.startTimer();
+  stopWatchVal.startTimer();
   $("#leader-board").css("display", "none");
   $("#btn-start").css("display", "none");
   $(".game-buttons").removeClass("hide");
@@ -29,6 +30,7 @@ btnStart.on("click", function () {
   $("#question-container").removeClass("hide");
 });
 
+// TIMER COUNTDOWN FUNCTION
 function stopWatch() {
   var countDown = startTime;
   var timer;
@@ -47,7 +49,7 @@ function stopWatch() {
         $("#hidden-results").removeClass("hide");
         result();
       }
-      // COOL FUNCTION BUT TIMER WON'T CLEAR
+      // COOL FUNCTION BUT TIMER WON'T CLEAR, WOULD LIKE TO USE BUT RAN OUT OF TIME(NO PUN INTENDED)
       // if (countDown <= 5) {
       //   $("#span-timer").fadeOut(400);
       //   $("#span-timer").fadeIn(400);
@@ -59,6 +61,7 @@ function stopWatch() {
   return { wrongAnswerPenalty, startTimer };
 }
 
+// RESET BUTTON Function, ON CLICK
 btnReset.on("click", function () {
   $("#btn-start").css("display", "inline");
   $("#btn-highScore").css("display", "inline");
@@ -75,21 +78,24 @@ btnReset.on("click", function () {
   clearInterval(timer);
 });
 
-var tristan = stopWatch();
+var stopWatchVal = stopWatch();
 
 var userNameEl = $("#user-name");
 
+// SAVE USER SCORES, ON CLICK
 btnSaveScore.on("click", function () {
   var userNameInput = userNameEl.val();
   saveHighScore(userNameInput, score);
   console.log(userNameInput);
 });
 
+// TOGGLE HIGH SCORE BOARD
 btnHighScore.on("click", function () {
   $("#leader-board").toggle();
   getHighScore();
 });
 
+// QUIZ / QUESTION SELECTION
 var index = 0;
 var attempt = 0;
 var score = 0;
@@ -101,33 +107,6 @@ var questions = quiz.sort(function () {
 
 var totalQuestion = questions.length;
 
-// $(function () {
-//   // timer code start from here
-
-//   let totaTime = 200; // 200 seconds for timer
-//   let min = 0;
-//   let sec = 0;
-//   let counter = 0;
-
-//   let timer = setInterval(function () {
-//     counter++;
-//     min = Math.floor((totaTime - counter) / 60); // calculating min
-//     sec = totaTime - min * 60 - counter;
-
-//     $(".timerBox span").text(min + ":" + sec);
-
-//     if (counter == totaTime) {
-//       alert("Time's up. press ok to show the result.");
-//       result();
-//       clearInterval(timer);
-//     }
-//   }, 1000); // timer set for 1 seconds interval
-//   // timer code end here
-
-//   // print Question
-//   printQuestion(index);
-// });
-
 function printQuestion(i) {
   $(".questionBox").text(questions[i].question);
   $(".optionBox span").eq(0).text(questions[i].option[0]);
@@ -136,19 +115,18 @@ function printQuestion(i) {
   $(".optionBox span").eq(3).text(questions[i].option[3]);
 }
 
+// ANSWER CHECKING FUNCTION
 function checkAnswer(option) {
   attempt++;
 
   var optionClicked = $(option).data("opt");
-
-  // console.log(questions[index]);
 
   if (optionClicked == questions[index].answer) {
     $(option).addClass("right");
     score++;
   } else {
     $(option).addClass("wrong");
-    tristan.wrongAnswerPenalty();
+    stopWatchVal.wrongAnswerPenalty();
     wrong++;
   }
 
@@ -157,6 +135,7 @@ function checkAnswer(option) {
   $(".optionBox span").attr("onclick", "");
 }
 
+//NEXT QUESTION FUNCTION
 function showNext() {
   if (index >= questions.length - 1) {
     showResult(0);
@@ -172,18 +151,22 @@ function showNext() {
   printQuestion(index);
 }
 
+//END OF QUIZ, DISPLAY RESULT FUNCTION
 function showResult(j) {
   if (
     j == 1 &&
     index < questions.length - 1 &&
     !confirm()
-    // "Quiz has not finished yet. Press ok to skip quiz & get you final result." removed function, not user friendly
+    // **REMOVED**
+    //"Quiz has not finished yet. Press ok to skip quiz & get you final result." removed function, not user friendly
   ) {
     return;
   }
 
   result();
 }
+
+//SAVING USER SCORE AND NAME INPUT TO LOCALSTORAGE
 var highScoreList = $("#high-scores-header");
 var userName = $("input[name=user-name");
 var saveUserName = "";
@@ -202,6 +185,7 @@ function saveHighScore(name, score) {
   localStorage.setItem("userArr", JSON.stringify(userArr));
 }
 
+//RETREIEVING SCORE AND NAME FROM LOCALSTORAG AND APPLY TO HIGH SCORE BOARD
 function getHighScore() {
   var highScore = JSON.parse(localStorage.getItem("userArr"));
   console.log(highScore);
@@ -212,9 +196,7 @@ function getHighScore() {
   });
 }
 
-// Function for result end
-
-// Result function start
+// RESULT FUNCTION
 function result() {
   $("#span-timer").hide();
   $("#question-container").hide();
@@ -226,28 +208,3 @@ function result() {
   $("#wrongAnswers").text(wrong);
   $("#btn-saveScore").css("display", "inline");
 }
-
-// finish later for scoreboard
-// $(function () {
-//   $("#btn-saveScore").click(function () {
-//     var userIntialsInput = $("#user-initials-input").val();
-//     localStorage.setItem("getvalue", userIntialsInput);
-//   });
-// });
-
-// calculateScore(){
-
-// }
-
-//after shpowing questions and options, increment the current Index , reset once question list is finished
-
-//button click- validate userchoice with correect answer attribute and increement index
-
-//   // if (this.target == showQuestions.correctAnswer) {
-//   //   score + 10;
-//   //   correctAnswer++;
-//   // } else {
-//   //   timer - 10;
-//   //   incorrectAnswer++;
-//   // }
-// }

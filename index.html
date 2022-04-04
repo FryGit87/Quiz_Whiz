@@ -8,24 +8,27 @@
     <title>Quiz Whiz</title>
     <link rel="stylesheet" href="style.css">
     
-
+<!-- FAVICON -->
 <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
-<!-- <link rel="manifest" href="/site.webmanifest"> -->
+
+<!-- CUSTOM FONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- LEADER BOARD AND CLEAR SCORE BUTTON -->
     <div id="leader-board" class="hide">
         <ul class="high-scores-display">
             <h2 id="high-scores-header">High Scores</h2>
         </ul>
         <button id="clear-storage">Clear Scores</button>
     </div>
-    <!-- <span id="span-timer">Click 'Start' to begin the Quiz!</span><br> -->
+
+    <!-- QUIZ DISPLAY -->
     <div class="container-wrapper">
         <div id="question-container" class="hide">
             <div class="questionBox">
@@ -38,7 +41,7 @@
                 <span onclick="checkAnswer(this)" data-opt="4"></span>
             </div>
         </div>
-        <!-- <div id="hidden-results" class="hide"> removed-->
+        <!-- RESULTS DISPLAY AND USER NAME INPUT -->
             <div class="box" id="resultScreen" style="display: none;">
                 <div class="title">
                     <h1>Whiz Kidz Quiz Result</h1>
@@ -57,51 +60,25 @@
                     <form id="user-initials">
                         <input type="text" class="form-input w-100" id="user-name" name="user-name"
                             placeholder="Enter your initials" />
-                        <!-- <button class="btn btn-info">Add Item</button> -->
                     </form>
-                    
-                    <!-- <h4 class="user-initials">
-                    Type your Initials :    </h4>
-                    <input type="text" id="user-initials-input"> -->
-
-
-
-
                 </div>
             </div>
-
-        <!-- </div> /removed-->
+        
+            <!-- BUTTONS CONTAINER -->
             <div class="btn-container"> 
                 <span id="span-timer">Click 'Start' to begin the Quiz!</span><br>
                 <button id="btn-start">Start</button>
                 <button id="btn-reset" class="hide game-buttons" onclick="window.location.href = 'index.html';">Reset</button>
                 <button id="btn-highScore">High Scores</button>
                 <button id="btn-saveScore">Save Score!</button>
-               
-
             </div>
+
+            <!-- NEXT QUESTION BUTTON -->
             <div class="footer">
                 <button onclick="showNext()" id="btn-next" class="hide game-buttons">
                     Next
                 </button>
             </div>
-                    <!-- <div class="box" id="resultScreen" style="display: none;">
-                        <div class="title">
-                            Whiz Kidz Quiz Result
-                        </div> -->
-                    
-                        <!-- <div class="resultBox">
-                            <label>Questions : </label>
-                            <span id="totalQuestion">10</span>
-                            <label>Attempt : </label>
-                            <span id="attemptQuestion">0</span>
-                            <label>Correct : </label>
-                            <span id="correctAnswers">0</span>
-                            <label>Wrong : </label>
-                            <span id="wrongAnswers">0</span>
-                        </div> -->
-                    
-                    <!-- </div> -->
         </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
