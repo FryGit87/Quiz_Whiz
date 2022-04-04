@@ -21,8 +21,8 @@ To build a timed coding quiz with multiple-choice questions that dynamically upd
 
 ## **Web App**
 
-!Start Page[./img/Start-page.png]()
-!High Score[./img/High-Score.png]()
-!First Question[./img/First-Question.png]()
-!Result Page[./img/Result-Page.png]()
-!Saved High Score[./img/Saved-High-Score.png]()
+![Start Page](/img/Start-page.png)
+![High Score](/img/High-Score.png)
+![First Question](/img/First-Question.png)
+![Result Page](/img/Result-Page.png)
+![Saved High Score](/img/Saved-High-Score.png)
