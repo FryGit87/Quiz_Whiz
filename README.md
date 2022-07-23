@@ -1,4 +1,4 @@
-# **Quiz Whiz | Vegetable Quiz**
+# **Quiz Whiz | Code Quiz**
 
 ## **App URL**
 
